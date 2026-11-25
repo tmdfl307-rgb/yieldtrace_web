@@ -1,20 +1,30 @@
-import type { Metadata } from 'next';
-import './globals.css';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'YieldTrace Web | 반도체 공정 Defect & 수율 모니터링 시스템',
-  description: 'Next.js + Tailwind CSS + Supabase 기반 반도체 Fab 수율 및 결함 실시간 분석 모니터링 시스템',
+  title: "YieldTrace | 반도체 공정 Defect & 수율 모니터링",
+  description: "반도체 제조 라인 Defect/Particle 검사 데이터 및 SPC p-관리도 수율 모니터링 시스템",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    title: "YieldTrace",
+    statusBarStyle: "black-translucent",
+  },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="ko" className="dark">
-      <body className="bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-white">
+    <html lang="ko">
+      <body className="antialiased">
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js')); }`,
+          }}
+        />
       </body>
     </html>
   );
