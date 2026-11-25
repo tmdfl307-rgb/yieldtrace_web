@@ -104,7 +104,6 @@ export async function createInspection(newInsp: Omit<Inspection, 'lot' | 'defect
   if (isSupabaseConfigured()) {
     try {
       const { error } = await supabase.from('inspection').insert([{
-        insp_id: newInsp.insp_id,
         lot_id: newInsp.lot_id,
         defect_type_id: newInsp.defect_type_id,
         inspect_qty: Number(newInsp.inspect_qty),
